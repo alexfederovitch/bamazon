@@ -36,24 +36,21 @@ let connection = mysql.createConnection({
     .then(function(answer) {
         switch (answer.action) {
             case 'View Products for Sale':
-                console.log('hello');
                 showStock();
                 setTimeout(managerList, 4000);
                 break;
 
             case 'View Low Inventory':
-                console.log('Goodbye');
                 lowInventory();
+                setTimeout(managerList, 1000);
                 break;
             
             case 'Add to Inventory':
-                console.log('Maybe');
                 showStock();
                 setTimeout(addInventory, 500);
                 break;
 
             case 'Add new Product':
-                console.log('Definitely');
                 addNewProduct();
                 break;
         }
@@ -91,7 +88,6 @@ let connection = mysql.createConnection({
         let item_id = input.add;
         connection.query('SELECT * FROM products', function(err, res) {
             if (err) throw err;
-            console.log(item_id);
             if (item_id > Math.max(res.length) || item_id <= 0 || item_id === "") {
                 console.log(`Please match a number to an Item # shown in the inventory\nTry again!!`);
                 addInventory();
